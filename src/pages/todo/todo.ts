@@ -17,6 +17,9 @@ export class TodoPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
+  addTodo() {    
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad TodoPage');
   }
