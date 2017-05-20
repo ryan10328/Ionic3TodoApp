@@ -12,7 +12,7 @@
 <ion-content padding>
   <ion-list>
     <ion-item *ngFor="let item of todos">
-      <ion-label>{{ item.title }}</ion-label>
+      <ion-label [ngClass]="{'done': item.done}">{{ item.title }}</ion-label>
       <ion-checkbox [(ngModel)]="item.done"></ion-checkbox>
     </ion-item>
   </ion-list>
