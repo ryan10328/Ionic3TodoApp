@@ -1,3 +1,4 @@
+import { DataServiceProvider } from './../../providers/data-service/data-service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
@@ -8,11 +9,16 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 })
 export class TodoPage {
   todos: any[] = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
-    this.todos = [
-      { title: 'Eat breakfast.', done: false },
-      { title: 'Ionic 3 tutorial', done: false }
-    ];
+  searchQuery: string;
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    private alertCtrl: AlertController,
+    private dataService: DataServiceProvider) {
+    this.todos = this.dataService.todos;
+  }
+
+  searchTodos() {
+    this.todos = this.dataService.searchTodos(this.searchQuery);
   }
 
   addTodo() {
@@ -26,7 +32,8 @@ export class TodoPage {
         {
           text: '新增', handler: data => {
             if (data) {
-              this.todos = [...this.todos, { title: data.todo, done: false }];
+              this.dataService.addTodo({ title: data.todo, done: false })
+              this.todos = this.dataService.todos;
             }
           }
         },
@@ -46,9 +53,8 @@ export class TodoPage {
       buttons: [
         {
           text: '是', handler: () => {
-            this.todos = this.todos.filter((x) => {
-              return item !== x;
-            });
+            this.dataService.deleteTodo(item);
+            this.todos = this.dataService.todos;
           }
         },
         { text: '否', role: 'cancel' }

@@ -10,6 +10,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
+  <ion-searchbar (ionInput)="searchTodos()" [(ngModel)]="searchQuery"></ion-searchbar>
   <ion-list>
     <ion-item-sliding *ngFor="let item of todos">
       <ion-item>
