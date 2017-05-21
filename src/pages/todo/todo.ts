@@ -39,6 +39,24 @@ export class TodoPage {
     alert.present();
   }
 
+  deleteTodo(item) {
+    let alert = this.alertCtrl.create({
+      title: '提示',
+      message: '請問您確認要刪除嗎?',
+      buttons: [
+        {
+          text: '是', handler: () => {
+            this.todos = this.todos.filter((x) => {
+              return item !== x;
+            });
+          }
+        },
+        { text: '否', role: 'cancel' }
+      ]
+    });
+    alert.present();
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad TodoPage');
   }
