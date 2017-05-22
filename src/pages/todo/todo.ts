@@ -14,11 +14,25 @@ export class TodoPage {
     public navParams: NavParams,
     private alertCtrl: AlertController,
     private dataService: DataServiceProvider) {
-    this.todos = this.dataService.todos;
+    this.dataService.getTodo().subscribe((response: any) => {
+      this.todos = response
+    });
+
   }
 
   searchTodos() {
-    this.todos = this.dataService.searchTodos(this.searchQuery);
+    // this.todos = this.dataService.searchTodos(this.searchQuery);
+    this.dataService.searchTodos(this.searchQuery).subscribe((response) => {
+      this.todos = response;
+    });
+  }
+
+  toggleTodo(item) {
+    this.dataService.toggleTodo(item).subscribe(() => {
+      this.dataService.getTodo().subscribe((data) => {
+        this.todos = data;
+      });
+    });
   }
 
   addTodo() {
@@ -33,7 +47,11 @@ export class TodoPage {
           text: '新增', handler: data => {
             if (data) {
               this.dataService.addTodo({ title: data.todo, done: false })
-              this.todos = this.dataService.todos;
+                .subscribe(() => {
+                  this.dataService.getTodo().subscribe((data) => {
+                    this.todos = data;
+                  });
+                });
             }
           }
         },
@@ -53,8 +71,11 @@ export class TodoPage {
       buttons: [
         {
           text: '是', handler: () => {
-            this.dataService.deleteTodo(item);
-            this.todos = this.dataService.todos;
+            this.dataService.deleteTodo(item).subscribe(() => {
+              this.dataService.getTodo().subscribe((data) => {
+                this.todos = data;
+              });
+            });
           }
         },
         { text: '否', role: 'cancel' }

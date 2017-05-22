@@ -15,7 +15,7 @@
     <ion-item-sliding *ngFor="let item of todos">
       <ion-item>
         <ion-label [ngClass]="{'done': item.done}">{{ item.title }}</ion-label>
-        <ion-checkbox [(ngModel)]="item.done"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="item.done" (click)="toggleTodo(item)"></ion-checkbox>
       </ion-item>
       <ion-item-options side="right">
         <button ion-button color="danger" (click)="deleteTodo(item)">
