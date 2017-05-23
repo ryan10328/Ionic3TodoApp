@@ -1,10 +1,11 @@
+import { IDataService } from './../../interfaces/IDataService';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/rx';
 
 @Injectable()
-export class DataServiceProvider {
+export class DataServiceProvider implements IDataService {
   todos: any[] = [];
 
   constructor(public http: Http) { }

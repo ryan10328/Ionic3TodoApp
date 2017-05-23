@@ -11,6 +11,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 import { HttpModule } from "@angular/http";
+import { IonicStorageModule } from '@ionic/storage';
+import { StorageDataServiceProvider } from '../providers/storage-data-service/storage-data-service';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { HttpModule } from "@angular/http";
   imports: [
     BrowserModule,
     HttpModule,
+    IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -35,7 +38,8 @@ import { HttpModule } from "@angular/http";
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    DataServiceProvider
+    DataServiceProvider,
+    StorageDataServiceProvider
   ]
 })
 export class AppModule { }
