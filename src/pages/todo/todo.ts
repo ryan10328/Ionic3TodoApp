@@ -2,7 +2,7 @@ import { StorageDataServiceProvider } from './../../providers/storage-data-servi
 // import { DataServiceProvider } from './../../providers/data-service/data-service';
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Events } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -15,9 +15,12 @@ export class TodoPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private alertCtrl: AlertController,
-    private dataService: StorageDataServiceProvider) {
+    private dataService: StorageDataServiceProvider,
+    private events: Events) {
+      
     this.dataService.getTodo().subscribe((response: any) => {
       this.todos = response
+      this.events.publish('todo:onChange', response);
     });
 
   }
@@ -33,6 +36,7 @@ export class TodoPage {
     this.dataService.toggleTodo(item).subscribe(() => {
       this.dataService.getTodo().subscribe((data) => {
         this.todos = data;
+        this.events.publish('todo:onChange', data);
       });
     });
   }
@@ -52,6 +56,7 @@ export class TodoPage {
                 .subscribe(() => {
                   this.dataService.getTodo().subscribe((data) => {
                     this.todos = data;
+                    this.events.publish('todo:onChange', data);
                   });
                 });
             }
@@ -76,6 +81,7 @@ export class TodoPage {
             this.dataService.deleteTodo(item).subscribe(() => {
               this.dataService.getTodo().subscribe((data) => {
                 this.todos = data;
+                this.events.publish('todo:onChange', data);
               });
             });
           }

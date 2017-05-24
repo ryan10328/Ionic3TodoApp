@@ -1,6 +1,7 @@
+import { StorageDataServiceProvider } from './../providers/storage-data-service/storage-data-service';
 import { TodoPage } from './../pages/todo/todo';
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -16,8 +17,13 @@ export class MyApp {
   rootPage: any = HomePage;
 
   pages: Array<{ title: string, component: any }>;
+  unDoneTasks: any[] = [];
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
+    private events: Events,
+    private dataService: StorageDataServiceProvider) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -27,6 +33,17 @@ export class MyApp {
       { title: 'Todo', component: TodoPage }
     ];
 
+    this.dataService.getTodo().subscribe((data: any[]) => {
+      this.unDoneTasks = data.filter((x) => {
+        return !x.done;
+      });
+    });
+
+    this.events.subscribe('todo:onChange', (data: any[]) => {
+      this.unDoneTasks = data.filter((x) => {
+        return !x.done;
+      });
+    });
   }
 
   initializeApp() {
