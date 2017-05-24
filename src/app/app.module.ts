@@ -24,7 +24,10 @@ import { StorageDataServiceProvider } from '../providers/storage-data-service/st
   imports: [
     BrowserModule,
     HttpModule,
-    IonicStorageModule.forRoot(),
+    IonicStorageModule.forRoot({
+      name: 'todoStorage',
+      driverOrder: ['localstorage', 'sqlite']
+    }),
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
