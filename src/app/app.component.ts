@@ -1,3 +1,4 @@
+import { VibrationPage } from './../pages/vibration/vibration';
 import { StorageDataServiceProvider } from './../providers/storage-data-service/storage-data-service';
 import { TodoPage } from './../pages/todo/todo';
 import { Component, ViewChild } from '@angular/core';
@@ -30,13 +31,16 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'List', component: ListPage },
-      { title: 'Todo', component: TodoPage }
+      { title: 'Todo', component: TodoPage },
+      { title: 'Vibration', component: VibrationPage }
     ];
 
     this.dataService.getTodo().subscribe((data: any[]) => {
-      this.unDoneTasks = data.filter((x) => {
-        return !x.done;
-      });
+      if (data) {
+        this.unDoneTasks = data.filter((x) => {
+          return !x.done;
+        });
+      }
     });
 
     this.events.subscribe('todo:onChange', (data: any[]) => {

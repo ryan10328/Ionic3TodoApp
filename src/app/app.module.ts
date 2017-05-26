@@ -1,3 +1,5 @@
+import { Vibration } from '@ionic-native/vibration';
+import { VibrationPage } from './../pages/vibration/vibration';
 import { TodoPage } from './../pages/todo/todo';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -19,7 +21,8 @@ import { StorageDataServiceProvider } from '../providers/storage-data-service/st
     MyApp,
     HomePage,
     ListPage,
-    TodoPage
+    TodoPage,
+    VibrationPage
   ],
   imports: [
     BrowserModule,
@@ -35,11 +38,13 @@ import { StorageDataServiceProvider } from '../providers/storage-data-service/st
     MyApp,
     HomePage,
     ListPage,
-    TodoPage
+    TodoPage,
+    VibrationPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    Vibration,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     DataServiceProvider,
     StorageDataServiceProvider
