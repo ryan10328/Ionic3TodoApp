@@ -1,3 +1,4 @@
+import { BarcodeScannerPage } from './../pages/barcode-scanner/barcode-scanner';
 import { VibrationPage } from './../pages/vibration/vibration';
 import { StorageDataServiceProvider } from './../providers/storage-data-service/storage-data-service';
 import { TodoPage } from './../pages/todo/todo';
@@ -32,7 +33,8 @@ export class MyApp {
       { title: 'Home', component: HomePage },
       { title: 'List', component: ListPage },
       { title: 'Todo', component: TodoPage },
-      { title: 'Vibration', component: VibrationPage }
+      { title: 'Vibration', component: VibrationPage },
+      { title: 'BarcodeScanner', component: BarcodeScannerPage }
     ];
 
     this.dataService.getTodo().subscribe((data: any[]) => {
