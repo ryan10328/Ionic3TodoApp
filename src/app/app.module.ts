@@ -1,3 +1,4 @@
+import { LocalNotificationPage } from './../pages/local-notification/local-notification';
 import { BarcodeScannerPage } from './../pages/barcode-scanner/barcode-scanner';
 import { Vibration } from '@ionic-native/vibration';
 import { VibrationPage } from './../pages/vibration/vibration';
@@ -17,6 +18,7 @@ import { HttpModule } from "@angular/http";
 import { IonicStorageModule } from '@ionic/storage';
 import { StorageDataServiceProvider } from '../providers/storage-data-service/storage-data-service';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     ListPage,
     TodoPage,
     VibrationPage,
-    BarcodeScannerPage
+    BarcodeScannerPage,
+    LocalNotificationPage
   ],
   imports: [
     BrowserModule,
@@ -44,13 +47,15 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     ListPage,
     TodoPage,
     VibrationPage,
-    BarcodeScannerPage
+    BarcodeScannerPage,
+    LocalNotificationPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Vibration,
     BarcodeScanner,
+    LocalNotifications,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     DataServiceProvider,
     StorageDataServiceProvider

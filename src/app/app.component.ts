@@ -1,3 +1,4 @@
+import { LocalNotificationPage } from './../pages/local-notification/local-notification';
 import { BarcodeScannerPage } from './../pages/barcode-scanner/barcode-scanner';
 import { VibrationPage } from './../pages/vibration/vibration';
 import { StorageDataServiceProvider } from './../providers/storage-data-service/storage-data-service';
@@ -34,7 +35,8 @@ export class MyApp {
       { title: 'List', component: ListPage },
       { title: 'Todo', component: TodoPage },
       { title: 'Vibration', component: VibrationPage },
-      { title: 'BarcodeScanner', component: BarcodeScannerPage }
+      { title: 'BarcodeScanner', component: BarcodeScannerPage },
+      { title: 'LocaNotifications', component: LocalNotificationPage }
     ];
 
     this.dataService.getTodo().subscribe((data: any[]) => {
