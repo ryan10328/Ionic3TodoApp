@@ -1,7 +1,7 @@
 import { LocalNotificationPage } from './../pages/local-notification/local-notification';
 import { BarcodeScannerPage } from './../pages/barcode-scanner/barcode-scanner';
 import { VibrationPage } from './../pages/vibration/vibration';
-import { StorageDataServiceProvider } from './../providers/storage-data-service/storage-data-service';
+// import { StorageDataServiceProvider } from './../providers/storage-data-service/storage-data-service';
 import { TodoPage } from './../pages/todo/todo';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, Events } from 'ionic-angular';
@@ -10,6 +10,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { BaseDataService } from "../interfaces/IDataService";
 
 @Component({
   templateUrl: 'app.html'
@@ -26,7 +27,7 @@ export class MyApp {
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
     private events: Events,
-    private dataService: StorageDataServiceProvider) {
+    private dataService: BaseDataService) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation

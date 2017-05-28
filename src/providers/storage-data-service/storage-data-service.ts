@@ -1,13 +1,16 @@
 import { Observable } from 'rxjs/Observable';
-import { IDataService } from './../../interfaces/IDataService';
+import { BaseDataService } from './../../interfaces/IDataService';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
+import 'rxjs/rx';
 import { Storage } from '@ionic/storage';
 
 @Injectable()
-export class StorageDataServiceProvider implements IDataService {
+export class StorageDataServiceProvider extends BaseDataService {
   todos: any[] = [];
   constructor(private storage: Storage) {
+    super();
+
     // 如果 Storage 裡面完全沒有東西 就預設一個空陣列
     let promise = this.storage.get('todos');
     promise.then((response) => {
@@ -16,6 +19,7 @@ export class StorageDataServiceProvider implements IDataService {
       }
       this.todos = response;
     })
+
   }
 
   getTodo() {

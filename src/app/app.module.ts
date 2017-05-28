@@ -1,3 +1,4 @@
+import { StorageDataServiceProvider } from './../providers/storage-data-service/storage-data-service';
 import { LocalNotificationPage } from './../pages/local-notification/local-notification';
 import { BarcodeScannerPage } from './../pages/barcode-scanner/barcode-scanner';
 import { Vibration } from '@ionic-native/vibration';
@@ -13,12 +14,15 @@ import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { DataServiceProvider } from '../providers/data-service/data-service';
 import { HttpModule } from "@angular/http";
 import { IonicStorageModule } from '@ionic/storage';
-import { StorageDataServiceProvider } from '../providers/storage-data-service/storage-data-service';
+// services
+// import { StorageDataServiceProvider } from '../providers/storage-data-service/storage-data-service';
+import { DataServiceProvider } from '../providers/data-service/data-service';
+//
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { BaseDataService } from "../interfaces/IDataService";
 
 
 @NgModule({
@@ -57,8 +61,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
     BarcodeScanner,
     LocalNotifications,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    DataServiceProvider,
-    StorageDataServiceProvider
+    { provide: BaseDataService, useClass: StorageDataServiceProvider },
   ]
 })
 export class AppModule { }

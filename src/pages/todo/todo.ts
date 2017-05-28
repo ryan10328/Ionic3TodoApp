@@ -1,8 +1,9 @@
-import { StorageDataServiceProvider } from './../../providers/storage-data-service/storage-data-service';
+// import { StorageDataServiceProvider } from './../../providers/storage-data-service/storage-data-service';
 // import { DataServiceProvider } from './../../providers/data-service/data-service';
 
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, Events } from 'ionic-angular';
+import { BaseDataService } from "../../interfaces/IDataService";
 
 @IonicPage()
 @Component({
@@ -15,7 +16,7 @@ export class TodoPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private alertCtrl: AlertController,
-    private dataService: StorageDataServiceProvider,
+    private dataService: BaseDataService,
     private events: Events) {
       
     this.dataService.getTodo().subscribe((response: any) => {
